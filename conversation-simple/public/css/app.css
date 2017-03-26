@@ -52,10 +52,13 @@ div {
 }
 
 #contentParent {
+  box-sizing: content-box;
   margin: 0 auto;
   max-height: 500px;
   max-width: 400px;
   height: 100%;
+  background-color: rgba(212, 212, 212, .2);
+  padding: 10px;
 }
 
 .responsive-columns-wrapper {
