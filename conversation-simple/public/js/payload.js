@@ -49,37 +49,12 @@ var PayloadPanel = (function() {
     var currentRequestPayloadSetter = Api.setRequestPayload;
     Api.setRequestPayload = function(newPayloadStr) {
       currentRequestPayloadSetter.call(Api, newPayloadStr);
-      displayPayload(settings.payloadTypes.request);
     };
 
     var currentResponsePayloadSetter = Api.setResponsePayload;
     Api.setResponsePayload = function(newPayload) {
       currentResponsePayloadSetter.call(Api, newPayload);
-      displayPayload(settings.payloadTypes.response);
     };
-  }
-
-  // Display a request or response payload that has just been sent/received
-  function displayPayload(typeValue) {
-    var isRequest = checkRequestType(typeValue);
-    if (isRequest !== null) {
-      // Create new payload DOM element
-      var payloadDiv = buildPayloadDomElement(isRequest);
-      var payloadElement = document.querySelector(isRequest
-              ? settings.selectors.payloadRequest : settings.selectors.payloadResponse);
-      // Clear out payload holder element
-      while (payloadElement.lastChild) {
-        payloadElement.removeChild(payloadElement.lastChild);
-      }
-      // Add new payload element
-      payloadElement.appendChild(payloadDiv);
-      // Set the horizontal rule to show (if request and response payloads both exist)
-      // or to hide (otherwise)
-      var payloadInitial = document.querySelector(settings.selectors.payloadInitial);
-      if (Api.getRequestPayload() || Api.getResponsePayload()) {
-        payloadInitial.classList.add('hide');
-      }
-    }
   }
 
   // Checks if the given typeValue matches with the request "name", the response "name", or neither
